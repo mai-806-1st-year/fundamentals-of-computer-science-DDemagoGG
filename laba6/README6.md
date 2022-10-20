@@ -62,6 +62,8 @@
   ![image](https://user-images.githubusercontent.com/114108084/196985269-d3fc8cb0-b108-4328-8417-8faada7cf143.png)
   ![image](https://user-images.githubusercontent.com/114108084/195420501-815eced8-a403-4fce-8f84-85d1b39c2032.png)
   ![image](https://user-images.githubusercontent.com/114108084/195420568-ab5043dc-db18-46ab-9043-0ff70eb1bc0e.png)
+  ![image](https://user-images.githubusercontent.com/114108084/196994128-dd87774e-9d85-423a-bf1f-ef9ca5f1b314.png)
+  ![image](https://user-images.githubusercontent.com/114108084/196994258-11aef1bb-6cb2-426a-8cfb-4aa5877a1f5e.png)
   
 ## 9. Дневник отладки должен содержать дату и время сеансов отладки и основные события (ошибки в сценарии и программе, нестандартные ситуации) и краткие комментарии к ним. В дневнике отладки приводятся сведения об использовании других ЭВМ, существенном участии преподавателя и других лиц в написании и отладке программы.
 
@@ -69,8 +71,13 @@
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 1 | дом. | 12.10.2022 | 01:30 | выполнение лабораторной работы | - | - |
 ## 10. Замечания автора по существу работы
-```
-```
+![image](https://user-images.githubusercontent.com/114108084/196993695-43d1fc19-0049-4ae0-b0e5-79ac7313fb10.png)
+![image](https://user-images.githubusercontent.com/114108084/196993797-80e7939e-67f0-41f5-9592-9cbe17fab1d7.png)
+![image](https://user-images.githubusercontent.com/114108084/196993884-bdabdc49-47cc-4331-8362-e2fe6145eb20.png)
+![image](https://user-images.githubusercontent.com/114108084/196994042-21bd4361-1394-440c-b1ea-c23a04e76bef.png)
+![image](https://user-images.githubusercontent.com/114108084/196994211-1d236760-391d-440e-97d9-b406298b55ba.png)
+![image](https://user-images.githubusercontent.com/114108084/196994371-94731652-0253-4b81-bf1e-ebdafbac7dd7.png)
+![image](https://user-images.githubusercontent.com/114108084/196994429-088e20ce-3b75-4a94-ae9d-b49aace9f674.png)
 ## 11. Выводы
  Были изучены базовые команды построения диаграммы Тъюринга. Был подуман и написан алгоритм для выполнения лабораторной работы. Были приобретены навыки, необходимые для дальнейшего обучения.
 

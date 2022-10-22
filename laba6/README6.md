@@ -71,7 +71,9 @@
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 1 | дом. | 12.10.2022 | 01:30 | выполнение лабораторной работы | - | - |
 ## 10. Замечания автора по существу работы
-![image](https://user-images.githubusercontent.com/114108084/196993695-43d1fc19-0049-4ae0-b0e5-79ac7313fb10.png)
+**В ходе защиты было предложено задание: реализация побитовой конъюнкции через дизъюнкцию по закону Де Моргана**
+    
+![image](https://user-images.githubusercontent.com/114108084/197330492-7accc965-df19-4704-91ba-eb8f86365588.png)
 ![image](https://user-images.githubusercontent.com/114108084/196993797-80e7939e-67f0-41f5-9592-9cbe17fab1d7.png)
 ![image](https://user-images.githubusercontent.com/114108084/196993884-bdabdc49-47cc-4331-8362-e2fe6145eb20.png)
 ![image](https://user-images.githubusercontent.com/114108084/196994042-21bd4361-1394-440c-b1ea-c23a04e76bef.png)

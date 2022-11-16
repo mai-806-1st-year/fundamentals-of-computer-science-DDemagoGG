@@ -71,7 +71,56 @@
 
 ### **8. Распечатка протокола**:
 ```
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~$ cd Загрузки
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ gcc -g -std=c18 laba9.c
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ gdb ./a.out
+GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
 
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./a.out...
+(gdb) b 53
+Breakpoint 1 at 0x1245: file laba9.c, line 53.
+(gdb) run
+Starting program: /home/demagog/Загрузки/a.out
+
+Breakpoint 1, main () at laba9.c:53
+(gdb) cont
+Continuing.
+
+Breakpoint 1, main () at laba9.c:53
+(gdb) next
+(gdb) next
+(gdb) bt
+#0  main () at laba9.c:58
+(gdb) print l
+$1 = 8
+(gdb) print i
+$2 = -16
+(gdb) print j
+$3 = -5
+(gdb) print index
+$4 = 1
+(gdb) cont
+Continuing.
+
+Breakpoint 1, main () at laba9.c:53
+...
+(gdb) cont
+Continuing.
+[Inferior 1 (process 8856) exited normally]
+(gdb) quit 
 ```
 
 ## 9. Дневник отладки должен содержать дату и время сеансов отладки и основные события (ошибки в сценарии и программе, нестандартные ситуации) и краткие комментарии к ним. В дневнике отладки приводятся сведения об использовании других ЭВМ, существенном участии преподавателя и других лиц в написании и отладке программы.

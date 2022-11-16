@@ -49,6 +49,11 @@
 ## 6. Идея, метод, алгоритм решения задачи (в формах: словесной, псевдокода, графической [блок-схема, диаграмма, рисунок, таблица] или формальные спецификации с пред- и постусловиями)
 ```
 #include <stdio.h>
+
+int mod (int a, int b){
+    return a - (a / b) * b;
+}
+
 int abs(int a){
     if (a > 0){
         return a;
@@ -56,6 +61,7 @@ int abs(int a){
         return -1 * a;
     }
 }
+
 int sign(int a){
     if (a > 0){
         return 1;
@@ -65,6 +71,7 @@ int sign(int a){
         return -1;
     }
 }
+
 int max(int a, int b){
     if (a > b){
         return a;
@@ -72,6 +79,7 @@ int max(int a, int b){
         return b;
     }
 }
+
 int min(int a, int b){
     if (a < b){
         return a;
@@ -79,6 +87,7 @@ int min(int a, int b){
         return b;
     }
 }
+
 int main(){
 const int i0 = -25;
 const int j0 = -9;
@@ -95,8 +104,8 @@ const int l0 = -8;
             bool = 1;
             break;
         }
-        buf1 = (abs(i - j) * l - abs(j - l) * i + abs(i - l) * j) % 20 - index;
-        buf2 = min(i, j) * max(j, l) * min(i, l) % 25 + 5 * sign(i - l);
+        buf1 = mod((abs(i - j) * l - abs(j - l) * i + abs(i - l) * j), 20) - index;
+        buf2 = mod((min(i, j) * max(j, l) * min(i, l)), 25) + 5 * sign(i - l);
         l = abs(l) * sign(i - j) - abs(i) * sign(j - l) + abs(j) * sign(i - l);
         i = buf1;
         j = buf2;
@@ -131,7 +140,68 @@ YES, time = 13 i = -20 j = 5 l = 30
 | 1 | дом. | 09.11.22 | 13:00 | Выполнение лабораторной работы | - | - |
 ## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
 ```
+#include <stdio.h>
+#include <locale.h>
 
+int sign(int a) {
+    if (a < 0) return -1;
+    if (a > 0) return 1;
+    return 0;
+}
+
+int abs(int a) {
+    if (a < 0) return -a;
+    return a;
+}
+
+int mod(int a, int b) {
+    return a - (a / b) * b;
+}
+
+int max(int a, int b) {
+    if (a < b) return b;
+    return a;
+}
+
+int min(int a, int b) {
+    return (a + b) - max(a, b);
+}
+
+struct state{
+    int i, j, l;
+};
+
+int check(struct state point){
+    return ((point.i + point.j >= -20) && (point.i + point.j <= -10));
+}
+
+void change(struct state* pt, int index){
+    int i = pt->i, j = pt->j, l = pt->l;
+    pt->i = mod((abs(i - j) * l - abs(j - l) * i + abs(i - l) * j), 20) - index;
+    pt->j = mod((min(i, j) * max(j, l) * min(i, l)), 25) + 5 * sign(i - l);
+    pt->l = abs(l) * sign(i - j) - abs(i) * sign(j - l) + abs(j) * sign(i - l); 
+}
+
+void run(struct state pt){
+    int flag = 0;
+    for (int index = 0; index < 50; index++){
+        if (check(pt)){
+            flag = 1;
+            printf("YES, time = %d i = %d j = %d l = %d\n", index, pt.i, pt.j, pt.l);
+            break;
+        }
+        change(&pt, index);
+    }
+    if (flag == 0){
+        printf("NO, time = %d i = %d j = %d l = %d\n", 49, pt.i, pt.j, pt.l);
+    }
+}
+
+int main(){
+    struct state pt = {-25, -9, -8};
+    run(pt);
+    return 0;
+}
 ```
 ## 11. Выводы
 Были изучены основы работы с компилятором gcc: установка, компиляция, выполнение программ.

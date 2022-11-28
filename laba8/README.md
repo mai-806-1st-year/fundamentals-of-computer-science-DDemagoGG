@@ -95,6 +95,8 @@ hello Worlddemagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 1 | дом. | 09.11.22 | 20:13 | Выполнение лабораторной работы | - | - |
 ## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
+
+Для защиты лабораторной работы было предложено задание: написание функции, которая раскладывает число на простые множители и выводит их количество.
 ```
 #include <stdio.h>
 #include <assert.h>
@@ -102,14 +104,20 @@ typedef unsigned uint;
 
 int factorize(uint x, int div[]){
     int i = 0;
-    int cur = 2;
+    int cur = 3;
+    while (x % 2 == 0){
+        div[i] = 2;
+        i++;
+        x /= 2;
+    }
     while (x != 1){
         while (x % cur == 0) {
             div[i] = cur;
             i++;
-            x = x / cur;
+            x /= cur;
         }
-        cur++;
+        cur += 2;
+        printf("%d\n", cur);
     }
     return i;
 }
@@ -121,7 +129,7 @@ int main(void) {
         dividers[2] == 3 && dividers[3] == 5 &&
         dividers[4] == 5
     );
-    printf("Vsyo okey\n");
+    printf("Everything is fine!\n");
 }
 ```
 

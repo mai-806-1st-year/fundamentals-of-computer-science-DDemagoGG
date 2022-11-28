@@ -61,46 +61,118 @@
 ## 7. Сценарий выполнения работы [план работы, первоначальный текст программы в черновике (можно на отдельном листе) и тесты либо соображения по тестированию]. 
 ```
 #include <stdio.h>
-int main(){
-    int flag = 1;
-    int num = 0;
-    char ch;
-    ch = getchar();
-    while (ch != EOF){
-        if (('0' <= ch) && (ch <= '9')){
-            if (flag == 0){
-                putchar(ch);
-            } else{
-            num = 10 * num + (ch - '0');
-            flag = 2;
-            }
-        } else if((ch != '\n') && (ch != ' ')){
-            if (flag == 2){
-                printf("%d", num);
-                num = 0;
-            }
-            flag = 0;
-            putchar(ch);
-        } else{
-            if (flag == 2){
-                if (ch == '\n'){
-                printf("%d\n", (int)(num * 1.609));
-                } else{
-                    printf("%d ", (int)(num * 1.609));
-                }
-            } else{
-                if (ch == '\n'){
-                printf("\n");
-                } else{
-                    printf(" ");
-                } 
-            }
-            flag = 1;
-            num = 0;
-        }
-        ch = getchar();
+#include <ctype.h>
+
+typedef enum {
+    STATE_OUT_OF_WORD,
+    STATE_IN_NUMBER,
+    STATE_IN_ZEROES,
+    STATE_IN_ASH,
+    STATE_IN_MAYBE_MILE,
+    STATE_IN_MILE
+} state;
+
+int is_digit_without_zero(char ch){
+    if(('0' < ch ) && (ch <= '9')){
+        return 1;
+    } else{
+        return 0;
     }
-    printf("\n");
+}
+
+int to_km(int mile){
+    return (int)(1.609 * mile);
+}
+
+int main(){
+    state state = STATE_OUT_OF_WORD;
+    char c;
+    int num = 0; 
+    c = getchar();
+    while (c != EOF){
+        switch (state){
+            case STATE_OUT_OF_WORD:
+                if (is_digit_without_zero(c)){
+                    state = STATE_IN_NUMBER;
+                    num += (c - '0');
+                } else if(c == '0'){
+                    state = STATE_IN_ZEROES;
+                    putchar('0');
+                } else if((c == ' ') || (c == '\n') || (c == '\t')){
+                    putchar(c);
+                } else{
+                    putchar(c);
+                    state = STATE_IN_ASH;
+                }
+                break;
+            case STATE_IN_NUMBER:
+                if(isdigit(c)){
+                    num = num * 10 + (c - '0');
+                } else if(c == 'm'){
+                    state = STATE_IN_MAYBE_MILE;
+                } else if((c == ' ') || (c == '\n') || (c == '\t')){
+                    printf("%d%c", num, c);
+                    num = 0;
+                    state = STATE_OUT_OF_WORD;
+                } else{
+                    state = STATE_IN_ASH;
+                    printf("%d", num);
+                    num = 0;
+                    putchar(c);
+                }
+                break;
+            case STATE_IN_ZEROES:
+                if(c == '0'){
+                    putchar('0');
+                } else if(is_digit_without_zero(c)){
+                    state = STATE_IN_NUMBER;
+                    num += (c - '0');
+                } else if((c == ' ') || (c == '\n') || (c == '\t')){
+                    putchar(c);
+                    state = STATE_OUT_OF_WORD;
+                } else{
+                    putchar(c);
+                    state = STATE_IN_ASH;
+                }
+                break;
+            case STATE_IN_ASH:
+                if ((c == ' ') || (c == '\n') || (c == '\t')){
+                    putchar(c);
+                    state = STATE_OUT_OF_WORD;
+                } else{
+                    putchar(c);
+                }
+                break;
+            case STATE_IN_MAYBE_MILE:
+                if (c == 'i'){
+                    state = STATE_IN_MILE;
+                } else if((c == ' ') || (c == '\n') || (c == '\t')){
+                    printf("%dm%c", num, c);
+                    num = 0;
+                    state = STATE_OUT_OF_WORD;
+                } else{
+                    printf("%dm", num);
+                    num = 0;
+                    putchar(c);
+                    state = STATE_IN_ASH;
+                }
+                break;
+            case STATE_IN_MILE:
+                if((c == ' ') || (c == '\n') || (c == '\t')){
+                    printf("%dkm%c", to_km(num), c);
+                    num = 0;
+                    state = STATE_OUT_OF_WORD;
+                } else{
+                    state = STATE_IN_ASH;
+                    printf("%dmi", num);
+                    num = 0;
+                    putchar(c);
+                }
+                break;
+    }
+        c = getchar();
+    }
+    return 0;
 }
 ```
 
@@ -108,34 +180,33 @@ int main(){
 Допущен к выполнению работы.  
 Подпись преподавателя _____________________
 ## 8. Распечатка протокола 
+
 ```
-demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ gcc laba11.c
-demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ ./a.out << EOF
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ gcc zlaba11.c
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ ./a.out << eof
 > 1000
-> 1000 sdkjf
-> 1000lskdf sdklfj1000 1000dskjf10fjk3
-> 1
-> 0
-> skdfjl
-> !
-> EOF
-1609
-1609 sdkjf
-1000lskdf sdklfj1000 1000dskjf10fjk3
-1
-0
-skdfjl
-!
+> 1000mi
+> 1000mik
+> 4523km
+> skdjfsdj sdf 10mi d12n3d3
+> eof
+1000
+1609km
+1000mik
+4523km
+skdjfsdj sdf 16km d12n3d3
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ 
 ```
+
 ## 9. Дневник отладки должен содержать дату и время сеансов отладки и основные события (ошибки в сценарии и программе, нестандартные ситуации) и краткие комментарии к ним. В дневнике отладки приводятся сведения об использовании других ЭВМ, существенном участии преподавателя и других лиц в написании и отладке программы.
 
 | № |  Лаб. или дом. | Дата | Время | Событие | Действие по исправлению | Примечание |
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 1 | дом. | 09.11.22 | 18:00 | Выполнение лабораторной работы | - | - |
 ## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
-```
 
-```
+Замечаний не было
+
 ## 11. Выводы
 Были приобретены навыки написания программ, анализирующих и обрабатывающих входные данные и работающих все зависимости от длины входного слова и количества строк, на языке Си. Изучена работа функций getchar и putchar.
 

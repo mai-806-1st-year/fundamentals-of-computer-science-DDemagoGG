@@ -60,34 +60,29 @@
 
 ```
 #include <stdio.h>
-int main(){
-    char a;
-    char b;
-    char c;
-    int index = 1;
-    a = getchar();
-    b = getchar();
-    c = getchar();
-    while (c != EOF){
-        if (c == '\n'){
-            index = 1;
-            putchar(b);
-            printf("\n");
-            a = getchar();
-            b = getchar();
-            c = getchar();
-            continue;
 
+void del_second_and_prelast(){
+    int n1, n2, n3;
+    int index = 1;
+    for (int c = getchar(); c != EOF; c = getchar()) {
+        n3 = (c - '0');
+        if (c == '\n'){
+            printf("%d\n", n2);
+            index = 1;
+            continue;
         }
-        if (index != 2){
-            putchar(a);            
+        if ((index > 2) && (index != 4)){
+            printf("%d", n1);
         }
+        n1 = n2;
+        n2 = n3;
         index += 1;
-        a = b;
-        b = c;
-        c = getchar();
     }
-return 0;
+}
+
+int main(){
+    del_second_and_prelast();
+    return 0;
 }
 ```
 
@@ -112,9 +107,9 @@ EOF
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 1 | дом. | 09.11.22 | 18:00 | Выполнение лабораторной работы | - | - |
 ## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
-```
 
-```
+Замечаний не было.
+
 ## 11. Выводы
 Были приобретены навыки написания программ, анализирующих входные числа и работающих все зависимости от длины входного числа, на языке Си. Изучена работа функций getchar и putchar.
 

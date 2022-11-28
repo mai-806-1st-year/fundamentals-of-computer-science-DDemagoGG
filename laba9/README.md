@@ -50,99 +50,6 @@
 ```
 #include <stdio.h>
 
-int mod (int a, int b){
-    return a - (a / b) * b;
-}
-
-int abs(int a){
-    if (a > 0){
-        return a;
-    } else{
-        return -1 * a;
-    }
-}
-
-int sign(int a){
-    if (a > 0){
-        return 1;
-    } else if (a == 0){
-        return 0;
-    } else{
-        return -1;
-    }
-}
-
-int max(int a, int b){
-    if (a > b){
-        return a;
-    } else {
-        return b;
-    }
-}
-
-int min(int a, int b){
-    if (a < b){
-        return a;
-    } else {
-        return b;
-    }
-}
-
-int main(){
-const int i0 = -25;
-const int j0 = -9;
-const int l0 = -8;
-    int i = -25;
-    int j = -9;
-    int l = -8;
-    int bool = 0;
-    int index = 0;
-    int buf1 = 0;
-    int buf2 = 0;
-    while (index != 50){
-        if ((i + j + 10 <= 0) && (i + j + 20 >= 0)){
-            bool = 1;
-            break;
-        }
-        buf1 = mod((abs(i - j) * l - abs(j - l) * i + abs(i - l) * j), 20) - index;
-        buf2 = mod((min(i, j) * max(j, l) * min(i, l)), 25) + 5 * sign(i - l);
-        l = abs(l) * sign(i - j) - abs(i) * sign(j - l) + abs(j) * sign(i - l);
-        i = buf1;
-        j = buf2;
-        index += 1;
-    }
-    if (bool == 1){
-        printf("YES, time = %d i = %d j = %d l = %d\n", index, i, j, l);
-    } else printf("NO, time = %d i = %d j = %d l = %d \n", index, i, j, l);
-    return 0;
-}
-```
-## 7. Сценарий выполнения работы [план работы, первоначальный текст программы в черновике (можно на отдельном листе) и тесты либо соображения по тестированию].
-1. Подумать над решением задачи.
-2. Написать программу.
-3. Скомпилировать программу.
-4. Запустить программу.
-5. Получить ответ.
-
-Пункты 1-7 отчета составляются сторого до начала лабораторной работы.
-Допущен к выполнению работы.  
-<b>Подпись преподавателя</b> ________________
-## 8. Распечатка протокола 
-```
-demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ gcc laba9.c
-demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ ./a.out
-YES, time = 13 i = -20 j = 5 l = 30
-```
-## 9. Дневник отладки должен содержать дату и время сеансов отладки и основные события (ошибки в сценарии и программе, нестандартные ситуации) и краткие комментарии к ним. В дневнике отладки приводятся сведения об использовании других ЭВМ, существенном участии преподавателя и других лиц в написании и отладке программы.
-
-| № |  Лаб. или дом. | Дата | Время | Событие | Действие по исправлению | Примечание |
-| ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-| 1 | дом. | 09.11.22 | 13:00 | Выполнение лабораторной работы | - | - |
-## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
-```
-#include <stdio.h>
-#include <locale.h>
-
 int sign(int a) {
     if (a < 0) return -1;
     if (a > 0) return 1;
@@ -200,6 +107,105 @@ void run(struct state pt){
 int main(){
     struct state pt = {-25, -9, -8};
     run(pt);
+    return 0;
+}
+```
+## 7. Сценарий выполнения работы [план работы, первоначальный текст программы в черновике (можно на отдельном листе) и тесты либо соображения по тестированию].
+1. Подумать над решением задачи.
+2. Написать программу.
+3. Скомпилировать программу.
+4. Запустить программу.
+5. Получить ответ.
+
+Пункты 1-7 отчета составляются сторого до начала лабораторной работы.
+Допущен к выполнению работы.  
+<b>Подпись преподавателя</b> ________________
+## 8. Распечатка протокола 
+```
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ gcc laba9.c
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ ./a.out
+YES, time = 13 i = -20 j = 5 l = 30
+```
+## 9. Дневник отладки должен содержать дату и время сеансов отладки и основные события (ошибки в сценарии и программе, нестандартные ситуации) и краткие комментарии к ним. В дневнике отладки приводятся сведения об использовании других ЭВМ, существенном участии преподавателя и других лиц в написании и отладке программы.
+
+| № |  Лаб. или дом. | Дата | Время | Событие | Действие по исправлению | Примечание |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| 1 | дом. | 09.11.22 | 13:00 | Выполнение лабораторной работы | - | - |
+## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
+
+Для защиты лабораторной работы было предложено задание: написать программу, имеющую тот же смысл, что и для задания лабораторной работы, но с другой фигурой, а именно - правильный пятиугольник, нижняя грань которого параллельно оси Ох, о котором известны координаты его центра и радиус вписанной окружности.
+```
+#include <stdio.h>
+#include <math.h>
+
+const double pi = 3.141592653;
+
+int sign(int a) {
+    if (a < 0) return -1;
+    if (a > 0) return 1;
+    return 0;
+}
+
+int abs(int a) {
+    if (a < 0) return -a;
+    return a;
+}
+
+int mod(int a, int b) {
+    return a - (a / b) * b;
+}
+
+int max(int a, int b) {
+    if (a < b) return b;
+    return a;
+}
+
+int min(int a, int b) {
+    return (a + b) - max(a, b);
+}
+
+struct state{
+    int i, j, l;
+};
+
+struct center{
+    int x, y, r;
+};
+
+int check(struct state pt, struct center penta){
+    return(((pt.j - penta.y) - tan(((double)108 * pi) / 180) * (pt.i - penta.x) + penta.r * sqrt(tan(((double)108 * pi) / 180) * tan(((double)108 * pi) / 180) + 1) >= 0)
+     && ((pt.j - penta.y) - tan(((double)36 * pi) / 180) * (pt.i - penta.x) - penta.r * sqrt(tan(((double)36 * pi) / 180) * tan(((double)36 * pi) / 180) + 1) <= 0)
+      && ((pt.j - penta.y) - tan(((double)144 * pi) / 180) * (pt.i - penta.x) - penta.r * sqrt(tan(((double)144 * pi) / 180) * tan(((double)144 * pi) / 180) + 1) <= 0)
+       && ((pt.j - penta.y) - tan(((double)72 * pi) / 180) * (pt.i - penta.x) + penta.r * sqrt(tan(((double)72 * pi) / 180) * tan(((double)72 * pi) / 180) + 1) >= 0)
+        && ((pt.j - penta.y) + penta.r >= 0));
+}
+
+void change(struct state* pt, int index){
+    int i = pt->i, j = pt->j, l = pt->l;
+    pt->i = mod((abs(i - j) * l - abs(j - l) * i + abs(i - l) * j), 20) - index;
+    pt->j = mod((min(i, j) * max(j, l) * min(i, l)), 25) + 5 * sign(i - l);
+    pt->l = abs(l) * sign(i - j) - abs(i) * sign(j - l) + abs(j) * sign(i - l); 
+}
+
+void run(struct state pt, struct center penta){
+    int flag = 0;
+    for (int index = 0; index < 50; index++){
+        if (check(pt, penta)){
+            flag = 1;
+            printf("YES, time = %d i = %d j = %d l = %d\n", index, pt.i, pt.j, pt.l);
+            break;
+        }
+        change(&pt, index);
+    }
+    if (flag == 0){
+        printf("NO, time = %d i = %d j = %d l = %d\n", 49, pt.i, pt.j, pt.l);
+    }
+}
+
+int main(){
+    struct center penta = {0, 0, 5};
+    struct state pt = {-25, -9, -8};
+    run(pt, penta);
     return 0;
 }
 ```

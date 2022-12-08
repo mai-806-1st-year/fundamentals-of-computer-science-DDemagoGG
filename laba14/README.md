@@ -208,6 +208,83 @@ demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$
 
 ## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
 
+Для защиты лабораторной работы было предложено задание: вывести матрицу согласно таблице
+
+| 1 | 2 | 5 | 6 | 17 | 18 | 21 | 22 |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| 3 | 4 | 7 | 8 | 19 | 20 | 23 | 24 |
+| 9 | 10 | 13 | 14 | 25 | 26 | 29 | 30 |
+| 11 | 12 | 15 | 16 | 27 | 28 | 31 | 32 |
+| 33 | 34 | 37 | 38 | 49 | 50 | 53 | 54 |
+| 35 | 36 | 39 | 40 | 51 | 52 | 55 | 56 |
+| 41 | 42 | 45 | 46 | 57 | 58 | 61 | 62 |
+| 43 | 44 | 47 | 48 | 59 | 60 | 63 | 64 |
+
+```
+#include <stdio.h>
+
+void input_matrix(int n, int (*massive)[n]){
+    for(int i = 0;i!=n;++i){
+        for (int j = 0; j != n; ++j){
+            scanf ("%02d", &massive[i][j]);
+        }
+    }
+}
+
+void print_Z(int n, int (*massive)[n], int i, int j){
+    if ((i < n) && (j < n)){
+        printf("%02d ", massive[i][j]);
+    }
+    if (j + 1 < n){
+        printf("%02d ", massive[i][j + 1]);
+    }
+    if (i + 1 < n){
+        printf("%02d ", massive[i + 1][j]);
+    }
+    if ((j + 1 < n) && (i + 1 < n)){
+        printf("%02d ", massive[i + 1][j + 1]);
+    }
+}
+
+void print_many_Z(int n, int i, int j, int maxstep, int (*massive)[n]){
+    if (maxstep == 1){
+        print_Z(n, massive, i, j);
+    } else{
+        print_many_Z(n, i, j, maxstep - 1, massive);
+        print_many_Z(n, i, j + power(2, maxstep - 1), maxstep - 1, massive);
+        print_many_Z(n, i + power(2, maxstep - 1), j, maxstep - 1, massive);
+        print_many_Z(n, i + power(2, maxstep - 1), j + power(2, maxstep - 1), maxstep - 1, massive);
+    }
+}
+
+int max_step(int n){
+    int st = 1;
+    while (n > power(2, st)){
+        st++;
+    }
+    return st;
+}
+
+int power(int a, int b){
+    int c = 1;
+    for (int i = 0; i < b; i++){
+        c *= a;
+    }
+    return c;
+}
+
+int main(){
+    int n;
+    scanf ("%d", &n);
+    int massive[n * n];
+    input_matrix(n,  massive);
+    int maxstep = max_step(n);
+    print_many_Z(n, 0, 0, maxstep, massive);
+    putchar('\n');
+    return 0;
+}
+```
+
 ## 11. Выводы
 
 Были приобретены навыки обработки матриц и их вывода в одну стоку согласно определённым правилам на языке Си.

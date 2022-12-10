@@ -146,6 +146,44 @@ YES
 
 ## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
 
+Для защиты лабораторной работы было предложено задание: https://codeforces.com/problemset/problem/579/A
+
+```
+#include <stdio.h>
+
+int main(){
+    int x, counter = 0, counter_bacteries = 1;
+    scanf("%d", &x);
+    while (x != 0){
+        if (counter_bacteries > x){
+            x -= counter_bacteries / 2;
+            counter_bacteries = 1;
+            counter += 1;
+        } else if(counter_bacteries == x){
+            x -= counter_bacteries;
+            counter += 1;
+        } else{
+            counter_bacteries *= 2;
+        }
+    }
+    printf("%d", counter);
+}
+```
+<b>Тесты:</b>
+
+```
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ ./"sashafile" 
+5
+2
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ ./"sashafile" 
+8
+1
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ ./"sashafile" 
+13
+3
+demagog@demagog-VivoBook-ASUSLaptop-X509BA-D509BA:~/Загрузки$ 
+```
+    
 ## 11. Выводы
 
 Были приобретены навыки работы с битовыми масками и выяснен принцип составления множества на языке Си.
